@@ -132,15 +132,16 @@ leftovers_dict = {
     "'d": " would",
     "'ll": " will",
     "'re": " are",
-    "'s": " is",
-    "ima": "I am going to",
-    "gonna": "going to",
-    "gotta": "got to"
+    "'s": " is"
 }
 
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})
 
 unsafe_dict = {k.replace("'", ""): v for k, v in contractions_dict.items()}
+unsafe_dict.update({"ima": "I am going to",
+                    "gonna": "going to",
+                    "gotta": "got to"
+                    })
 
 leftovers_re = re.compile('(%s)' % '|'.join(leftovers_dict.keys()), re.IGNORECASE)
 contractions_re = re.compile('(%s)' % '|'.join(contractions_dict.keys()), re.IGNORECASE)

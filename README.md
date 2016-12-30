@@ -22,8 +22,8 @@ contractions.fix("you're happy now")
 # "you are happy now"
 contractions.fix("yall are happy now", slang=False) # default: true
 # "yall are happy"
-contractions.fix("you all are happy now")
-# "yall happy now"
+contractions.fix("yall are happy now")
+# "you all are happy now"
 ```
 
 ## Installation

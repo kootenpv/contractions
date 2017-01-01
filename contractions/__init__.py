@@ -180,10 +180,12 @@ def fix(s, leftovers=True, slang=True):
         if slang and slang_re.search(s):
             pass
         else:
-            return s
+            # ensure str like expected from re.sub
+            return str(s)
     s = contractions_re.sub(rc, s)
     if leftovers:
         s = leftovers_re.sub(rl, s)
     if slang:
         s = unsafe_re.sub(ru, s)
+
     return s

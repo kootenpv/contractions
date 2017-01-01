@@ -1,5 +1,6 @@
 import re
 
+
 contractions_dict = {
     "ain't": "not",
     "aren't": "are not",
@@ -120,7 +121,8 @@ contractions_dict = {
     "you've": "you have",
     "doin'": "doing",
     "goin'": "going",
-    "nothin'": "nothing"
+    "nothin'": "nothing",
+    "somethin'": "somethin'"
 }
 
 contractions_dict.update({k.replace("'", "’"): v for k, v in contractions_dict.items()})
@@ -137,20 +139,23 @@ leftovers_dict = {
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})
 
 unsafe_dict = {k.replace("'", ""): v for k, v in contractions_dict.items()}
-unsafe_dict.update({"ima": "I am going to",
-                    "gonna": "going to",
-                    "gotta": "got to"
-                    })
 
-leftovers_re = re.compile('(%s)' % '|'.join(leftovers_dict.keys()), re.IGNORECASE)
-contractions_re = re.compile('(%s)' % '|'.join(contractions_dict.keys()), re.IGNORECASE)
+slang = {
+    "ima": "I am going to",
+    "gonna": "going to",
+    "gotta": "got to"
+}
 
-unsafe_re = re.compile(r"\b" + r"\b|\b".join(unsafe_dict) + r"\b", re.IGNORECASE)
+unsafe_dict.update(slang)
+
+leftovers_re = re.compile('|'.join(sorted(leftovers_dict.keys())), re.IGNORECASE)
+contractions_re = re.compile('|'.join(sorted(contractions_dict.keys())), re.IGNORECASE)
+unsafe_re = re.compile(r"\b" + r"\b|\b".join(sorted(unsafe_dict)) + r"\b", re.IGNORECASE)
 
 
 def _replacer(dc):
     def replace(match):
-        v = match.group(0)
+        v = match.group()
         if v in dc:
             return dc[v]
         v = v.lower()
@@ -159,11 +164,26 @@ def _replacer(dc):
         return v
     return replace
 
+slang_re = re.compile(r"\b" + r"\b|\b".join(sorted(slang)) + r"\b", re.IGNORECASE)
+
+LIM_RE = re.compile("['’]")
+
+rc = _replacer(contractions_dict)
+rl = _replacer(leftovers_dict)
+ru = _replacer(unsafe_dict)
+
 
 def fix(s, leftovers=True, slang=True):
-    s = contractions_re.sub(_replacer(contractions_dict), s)
+    # when not expecting a lot of matches, this will be 30x faster
+    # otherwise not noticeably slower even in benchmarks
+    if not LIM_RE.search(s):
+        if slang and slang_re.search(s):
+            pass
+        else:
+            return s
+    s = contractions_re.sub(rc, s)
     if leftovers:
-        s = leftovers_re.sub(_replacer(leftovers_dict), s)
+        s = leftovers_re.sub(rl, s)
     if slang:
-        s = unsafe_re.sub(_replacer(unsafe_dict), s)
+        s = unsafe_re.sub(ru, s)
     return s

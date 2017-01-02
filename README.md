@@ -5,6 +5,7 @@ This package is capable of resolving contractions (and slang), examples:
 ```
 you're -> you are
 i'm    -> I am
+# uses \b boundaries for "unsafe"
 ima    -> I am going to
 youll  -> you all
 gotta  -> got to
@@ -20,9 +21,9 @@ Note that in ambigious cases it will revert to the most common case:
 import contractions
 contractions.fix("you're happy now")
 # "you are happy now"
-contractions.fix("yall are happy now", slang=False) # default: true
+contractions.fix("yall're happy now", slang=False) # default: true
 # "yall are happy"
-contractions.fix("yall are happy now")
+contractions.fix("yall're happy now")
 # "you all are happy now"
 ```
 

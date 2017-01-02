@@ -143,7 +143,7 @@ unsafe_dict = {k.replace("'", ""): v for k, v in contractions_dict.items()}
 slang = {
     "ima": "I am going to",
     "gonna": "going to",
-    "gotta": "got to"
+    "gotta": "got to",
 }
 
 unsafe_dict.update(slang)

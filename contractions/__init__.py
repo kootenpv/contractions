@@ -164,7 +164,8 @@ def _replacer(dc):
         return v
     return replace
 
-slang_re = re.compile(r"\b" + r"\b|\b".join(sorted(slang)) + r"\b", re.IGNORECASE)
+slang_re = re.compile(r"\b" + r"\b|\b".join(sorted(list(slang) +
+                                                   list(unsafe_dict))) + r"\b", re.IGNORECASE)
 
 LIM_RE = re.compile("['’]")
 

@@ -7,7 +7,7 @@ you're -> you are
 i'm    -> I am
 # uses \b boundaries for "unsafe"
 ima    -> I am going to
-youll  -> you all
+yall  -> you all
 gotta  -> got to
 ```
 

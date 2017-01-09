@@ -144,6 +144,8 @@ slang = {
     "ima": "I am going to",
     "gonna": "going to",
     "gotta": "got to",
+    "u": "you",
+    "r ": "are "
 }
 
 unsafe_dict.update(slang)

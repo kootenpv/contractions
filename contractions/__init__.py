@@ -144,6 +144,7 @@ slang = {
     "ima": "I am going to",
     "gonna": "going to",
     "gotta": "got to",
+    "gimme": "give me",
     "u": "you",
     "r ": "are "
 }

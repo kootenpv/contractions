@@ -2,7 +2,7 @@ import re
 
 
 contractions_dict = {
-    "ain't": "not",
+    "ain't": "are not",
     "aren't": "are not",
     "can't": "cannot",
     "can't've": "cannot have",
@@ -125,7 +125,10 @@ contractions_dict = {
     "somethin'": "somethin'"
 }
 
+
+contractions_re_keys = [x.replace("'", "['’]") for x in contractions_dict]
 contractions_dict.update({k.replace("'", "’"): v for k, v in contractions_dict.items()})
+
 
 leftovers_dict = {
     "'all": '',
@@ -138,13 +141,17 @@ leftovers_dict = {
 
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})
 
-unsafe_dict = {k.replace("'", ""): v for k, v in contractions_dict.items()}
+safety_keys = set(["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd"])
+
+unsafe_dict = {k.replace("'", ""): v for k, v in contractions_dict.items()
+               if k.lower() not in safety_keys}
 
 slang = {
     "ima": "I am going to",
     "gonna": "going to",
     "gotta": "got to",
     "gimme": "give me",
+    "asap": "as soon as possible",
     "u": "you",
     "r ": "are "
 }
@@ -152,7 +159,7 @@ slang = {
 unsafe_dict.update(slang)
 
 leftovers_re = re.compile('|'.join(sorted(leftovers_dict.keys())), re.IGNORECASE)
-contractions_re = re.compile('|'.join(sorted(contractions_dict.keys())), re.IGNORECASE)
+contractions_re = re.compile('|'.join(sorted(contractions_re_keys)), re.IGNORECASE)
 unsafe_re = re.compile(r"\b" + r"\b|\b".join(sorted(unsafe_dict)) + r"\b", re.IGNORECASE)
 
 

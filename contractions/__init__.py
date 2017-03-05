@@ -137,6 +137,7 @@ leftovers_dict = {
     "'d": " would",
     "'ll": " will",
     "'re": " are",
+    "'em": " them"
 }
 
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})

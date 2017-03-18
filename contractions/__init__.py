@@ -151,6 +151,7 @@ slang = {
     "ima": "I am going to",
     "gonna": "going to",
     "gotta": "got to",
+    "woulda": "would have",
     "gimme": "give me",
     "asap": "as soon as possible",
     "u": "you",

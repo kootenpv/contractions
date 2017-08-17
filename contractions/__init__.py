@@ -122,7 +122,7 @@ contractions_dict = {
     "doin'": "doing",
     "goin'": "going",
     "nothin'": "nothing",
-    "somethin'": "somethin'"
+    "somethin'": "something"
 }
 
 

@@ -142,7 +142,7 @@ leftovers_dict = {
 
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})
 
-safety_keys = set(["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd"])
+safety_keys = set(["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd", "we're"])
 
 unsafe_dict = {k.replace("'", ""): v for k, v in contractions_dict.items()
                if k.lower() not in safety_keys}

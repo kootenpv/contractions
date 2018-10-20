@@ -122,7 +122,7 @@ contractions_dict = {
     "doin'": "doing",
     "goin'": "going",
     "nothin'": "nothing",
-    "somethin'": "something"
+    "somethin'": "something",
 }
 
 
@@ -137,25 +137,27 @@ leftovers_dict = {
     "'d": " would",
     "'ll": " will",
     "'re": " are",
-    "'em": " them"
+    "'em": " them",
 }
 
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})
 
 safety_keys = set(["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd", "we're"])
 
-unsafe_dict = {k.replace("'", ""): v for k, v in contractions_dict.items()
-               if k.lower() not in safety_keys}
+unsafe_dict = {
+    k.replace("'", ""): v for k, v in contractions_dict.items() if k.lower() not in safety_keys
+}
 
 slang = {
     "ima": "I am going to",
     "gonna": "going to",
     "gotta": "got to",
+    "wanna": "want to",
     "woulda": "would have",
     "gimme": "give me",
     "asap": "as soon as possible",
     "u": "you",
-    "r ": "are "
+    "r ": "are ",
 }
 
 unsafe_dict.update(slang)
@@ -174,10 +176,13 @@ def _replacer(dc):
         if v in dc:
             return dc[v]
         return v
+
     return replace
 
-slang_re = re.compile(r"\b" + r"\b|\b".join(sorted(list(slang) +
-                                                   list(unsafe_dict))) + r"\b", re.IGNORECASE)
+
+slang_re = re.compile(
+    r"\b" + r"\b|\b".join(sorted(list(slang) + list(unsafe_dict))) + r"\b", re.IGNORECASE
+)
 
 LIM_RE = re.compile("['’]")
 

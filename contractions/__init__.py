@@ -23,6 +23,7 @@ contractions_dict = {
     "he'll've": "he will have",
     "he's": "he is",
     "how'd": "how did",
+    "how're": "how are",
     "how'd'y": "how do you",
     "how'll": "how will",
     "how's": "how is",

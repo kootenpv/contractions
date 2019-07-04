@@ -4,8 +4,8 @@ from textsearch import TextSearch
 contractions_dict = {
     "ain't": "are not",
     "aren't": "are not",
-    "can't": "cannot",
-    "can't've": "cannot have",
+    "can't": "can not",
+    "can't've": "can not have",
     "'cause": "because",
     "could've": "could have",
     "couldn't": "could not",
@@ -120,11 +120,22 @@ contractions_dict = {
     "you'll've": "you shall have",
     "you're": "you are",
     "you've": "you have",
-    "doin'": "doing",
-    "goin'": "going",
-    "nothin'": "nothing",
-    "somethin'": "something",
 }
+
+for month in [
+    "january",
+    "february",
+    "march",
+    "april",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+]:
+    contractions_dict[month[:3] + "."] = month
 
 contractions_dict.update({k.replace("'", "’"): v for k, v in contractions_dict.items()})
 
@@ -137,6 +148,16 @@ leftovers_dict = {
     "'ll": " will",
     "'re": " are",
     "'em": " them",
+    "doin'": "doing",
+    "goin'": "going",
+    "nothin'": "nothing",
+    "somethin'": "something",
+    "havin'": "having",
+    "doin'": "doing",
+    "lovin'": "loving",
+    "'coz": "because",
+    "thats": "that is",
+    "whats": "what is",
 }
 
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})

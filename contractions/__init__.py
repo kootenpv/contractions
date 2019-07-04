@@ -1,4 +1,4 @@
-import re
+from textsearch import TextSearch
 
 
 contractions_dict = {
@@ -126,8 +126,6 @@ contractions_dict = {
     "somethin'": "something",
 }
 
-
-contractions_re_keys = [x.replace("'", "['’]") for x in contractions_dict]
 contractions_dict.update({k.replace("'", "’"): v for k, v in contractions_dict.items()})
 
 
@@ -149,7 +147,7 @@ unsafe_dict = {
     k.replace("'", ""): v for k, v in contractions_dict.items() if k.lower() not in safety_keys
 }
 
-slang = {
+slang_dict = {
     "ima": "I am going to",
     "gonna": "going to",
     "gotta": "got to",
@@ -161,50 +159,37 @@ slang = {
     "r ": "are ",
 }
 
-unsafe_dict.update(slang)
+slang_dict.update(unsafe_dict)
 
-leftovers_re = re.compile('|'.join(sorted(leftovers_dict.keys())), re.IGNORECASE)
-contractions_re = re.compile('|'.join(sorted(contractions_re_keys)), re.IGNORECASE)
-unsafe_re = re.compile(r"\b" + r"\b|\b".join(sorted(unsafe_dict)) + r"\b", re.IGNORECASE)
+ts_leftovers = TextSearch("ignore", "norm")
+ts_leftovers.add(contractions_dict)
+ts_leftovers.add(leftovers_dict)
 
+ts_leftovers_slang = TextSearch("ignore", "norm")
+ts_leftovers_slang.add(contractions_dict)
+ts_leftovers_slang.add(leftovers_dict)
+ts_leftovers_slang.add(slang_dict)
 
-def _replacer(dc):
-    def replace(match):
-        v = match.group()
-        if v in dc:
-            return dc[v]
-        v = v.lower()
-        if v in dc:
-            return dc[v]
-        return v
+ts_slang = TextSearch("ignore", "norm")
+ts_slang.add(contractions_dict)
+ts_slang.add(slang_dict)
 
-    return replace
+ts_basic = TextSearch("ignore", "norm")
+ts_basic.add(contractions_dict)
 
-
-slang_re = re.compile(
-    r"\b" + r"\b|\b".join(sorted(list(slang) + list(unsafe_dict))) + r"\b", re.IGNORECASE
-)
-
-LIM_RE = re.compile("['’]")
-
-rc = _replacer(contractions_dict)
-rl = _replacer(leftovers_dict)
-ru = _replacer(unsafe_dict)
+replacers = {
+    (True, False): ts_leftovers,
+    (True, True): ts_leftovers_slang,
+    (False, True): ts_slang,
+    (False, False): ts_basic,
+}
 
 
 def fix(s, leftovers=True, slang=True):
-    # when not expecting a lot of matches, this will be 30x faster
-    # otherwise not noticeably slower even in benchmarks
-    if not LIM_RE.search(s):
-        if slang and slang_re.search(s):
-            pass
-        else:
-            # ensure str like expected from re.sub
-            return str(s)
-    s = contractions_re.sub(rc, s)
-    if leftovers:
-        s = leftovers_re.sub(rl, s)
-    if slang:
-        s = unsafe_re.sub(ru, s)
+    ts = replacers[(leftovers, slang)]
+    return ts.replace(s)
 
-    return s
+
+def add(key, value):
+    for ts in replacers.values():
+        ts.add(key, value)

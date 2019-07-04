@@ -1,5 +1,7 @@
 # contractions
 
+**Update**: highly advised to use a `contractions>0.0.18` as it is 50x faster.
+
 This package is capable of resolving contractions (and slang), examples:
 
 ```
@@ -26,6 +28,13 @@ contractions.fix("yall're happy now", slang=False) # default: true
 contractions.fix("yall're happy now")
 # "you all are happy now"
 ```
+
+## Easy to add your own!
+
+Since `contractions>0.0.18`, you can easily add your own:
+
+    import contractions
+    contractions.add('mychange', 'my change')
 
 ## Installation
 

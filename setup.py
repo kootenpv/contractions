@@ -36,4 +36,5 @@ setup(name='contractions',
       license='MIT',
       packages=find_packages(),
       zip_safe=False,
-      platforms='any')
+      platforms='any',
+      install_requires=['textsearch'])

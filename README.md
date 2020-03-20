@@ -33,9 +33,13 @@ contractions.fix("yall're happy now")
 
 Since `contractions>0.0.18`, you can easily add your own:
 
-    import contractions
-    contractions.add('mychange', 'my change')
+```python
+import contractions
+contractions.add('mychange', 'my change')
+```
 
 ## Installation
 
-    pip install contractions
+```shell
+pip install contractions
+```

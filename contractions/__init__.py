@@ -2,15 +2,16 @@ from itertools import product
 from textsearch import TextSearch
 
 import json
+import pkgutil
 
-json_open = open("contractions/contractions_dict.json", 'r')
-contractions_dict = json.load(json_open)
+json_open = pkgutil.get_data('contractions', 'data/contractions_dict.json')
+contractions_dict = json.loads(json_open.decode('utf-8'))
 
-json_open = open("contractions/leftovers_dict.json", 'r')
-leftovers_dict = json.load(json_open)
+json_open = pkgutil.get_data('contractions', 'data/leftovers_dict.json')
+leftovers_dict = json.loads(json_open.decode('utf-8'))
 
-json_open = open("contractions/slang_dict.json", 'r')
-slang_dict = json.load(json_open)
+json_open = pkgutil.get_data('contractions', 'data/slang_dict.json')
+slang_dict = json.loads(json_open.decode('utf-8'))
 
 for month in [
     "january",

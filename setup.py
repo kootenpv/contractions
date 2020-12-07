@@ -3,7 +3,7 @@ from setuptools import setup
 
 MAJOR_VERSION = "0"
 MINOR_VERSION = "0"
-MICRO_VERSION = "39"
+MICRO_VERSION = "40"
 VERSION = "{}.{}.{}".format(MAJOR_VERSION, MINOR_VERSION, MICRO_VERSION)
 
 setup(
@@ -15,7 +15,7 @@ setup(
     package_data={
         # If any package contains *.txt or *.rst files, include them:
         # '': ['*.txt', '*.rst'],
-        "data": ["data/*.json"]
+        "data": ["*.json"]
     },
     author_email="kootenpv@gmail.com",
     classifiers=[

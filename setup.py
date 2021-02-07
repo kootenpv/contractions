@@ -3,7 +3,7 @@ from setuptools import setup
 
 MAJOR_VERSION = "0"
 MINOR_VERSION = "0"
-MICRO_VERSION = "41"
+MICRO_VERSION = "45"
 VERSION = "{}.{}.{}".format(MAJOR_VERSION, MINOR_VERSION, MICRO_VERSION)
 
 setup(
@@ -43,5 +43,5 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     platforms="any",
-    install_requires=["textsearch"],
+    install_requires=["textsearch>=0.0.21"],
 )

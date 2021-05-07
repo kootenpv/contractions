@@ -91,10 +91,15 @@ replacers = {
 }
 
 
-def fix(s, leftovers=True, slang=True):
+def fix(s, leftovers=True, slang=True, return_pairs=False):
     ts = replacers[(leftovers, slang)]
-    return ts.replace(s)
+    return ts.replace(s, return_pairs)
 
+def reverse(s, matches):
+    if matches:
+        for cont, exp in matches:
+            s = s.replace(exp, cont)
+    return s
 
 def add(key, value):
     for ts in replacers.values():

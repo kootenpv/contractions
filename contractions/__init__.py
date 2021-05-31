@@ -4,14 +4,14 @@ from textsearch import TextSearch
 import json
 import pkgutil
 
-json_open = pkgutil.get_data('contractions', 'data/contractions_dict.json')
-contractions_dict = json.loads(json_open.decode('utf-8'))
+json_open = pkgutil.get_data("contractions", "data/contractions_dict.json")
+contractions_dict = json.loads(json_open.decode("utf-8"))
 
-json_open = pkgutil.get_data('contractions', 'data/leftovers_dict.json')
-leftovers_dict = json.loads(json_open.decode('utf-8'))
+json_open = pkgutil.get_data("contractions", "data/leftovers_dict.json")
+leftovers_dict = json.loads(json_open.decode("utf-8"))
 
-json_open = pkgutil.get_data('contractions', 'data/slang_dict.json')
-slang_dict = json.loads(json_open.decode('utf-8'))
+json_open = pkgutil.get_data("contractions", "data/slang_dict.json")
+slang_dict = json.loads(json_open.decode("utf-8"))
 
 for month in [
     "january",
@@ -32,7 +32,9 @@ contractions_dict.update({k.replace("'", "’"): v for k, v in contractions_dict
 
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})
 
-safety_keys = set(["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd", "we're", "i'll"])
+safety_keys = set(
+    ["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd", "we're", "i'll", "who're"]
+)
 
 
 def get_combinations(tokens, joiners):

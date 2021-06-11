@@ -33,7 +33,7 @@ contractions_dict.update({k.replace("'", "’"): v for k, v in contractions_dict
 leftovers_dict.update({k.replace("'", "’"): v for k, v in leftovers_dict.items()})
 
 safety_keys = set(
-    ["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd", "we're", "i'll", "who're"]
+    ["he's", "he'll", "we'll", "we'd", "it's", "i'd", "we'd", "we're", "i'll", "who're", "o'"]
 )
 
 

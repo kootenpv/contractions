@@ -32,5 +32,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.py-version }}
+      - name: Install requirements
+        run: pip install pytest
       - name: Run pytest
         run: pytest

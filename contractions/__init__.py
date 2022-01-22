@@ -68,20 +68,20 @@ for k, v in contractions_dict.items():  # contractions_dict.items():
 
 slang_dict.update(unsafe_dict)
 
-ts_leftovers = TextSearch("ignore", "norm")
+ts_leftovers = TextSearch("insensitive", "norm")
 ts_leftovers.add(contractions_dict)
 ts_leftovers.add(leftovers_dict)
 
-ts_leftovers_slang = TextSearch("ignore", "norm")
+ts_leftovers_slang = TextSearch("insensitive", "norm")
 ts_leftovers_slang.add(contractions_dict)
 ts_leftovers_slang.add(leftovers_dict)
 ts_leftovers_slang.add(slang_dict)
 
-ts_slang = TextSearch("ignore", "norm")
+ts_slang = TextSearch("insensitive", "norm")
 ts_slang.add(contractions_dict)
 ts_slang.add(slang_dict)
 
-ts_basic = TextSearch("ignore", "norm")
+ts_basic = TextSearch("insensitive", "norm")
 ts_basic.add(contractions_dict)
 
 ts_view_window = TextSearch("insensitive", "object")

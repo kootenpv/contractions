@@ -17,7 +17,7 @@ jobs:
       - name: Install requirements
         run: pip install flake8 pycodestyle
       - name: Run flake8
-        run: flake8 . --count --show-source --statistics
+        run: flake8 . --count --show-source --statistics --ignore=E501
 
   test:
     strategy:

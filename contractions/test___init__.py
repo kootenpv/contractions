@@ -1,9 +1,12 @@
-import pytest
 import contractions
 
 
 def test_fix():
     assert contractions.fix("you're happy now") == "you are happy now"
+
+
+def test_insensitivity():
+    assert contractions.fix("You're happier now") == "You are happier now"
 
 
 def test_add():
